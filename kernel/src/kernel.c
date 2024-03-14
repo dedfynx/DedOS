@@ -1,7 +1,7 @@
 #include <limine.h>
 
 #include "Common.h"
-//#include "gdt.h"
+// #include "gdt.h"
 
 // Set the base revision to 1, this is recommended as this is the latest
 // base revision described by the Limine boot protocol specification.
@@ -29,14 +29,16 @@ hcf(void)
     }
 }
 
-//test long mode
-static inline uint64_t rdmsr(uint32_t msr) {
+// test long mode
+static inline uint64_t rdmsr(uint32_t msr)
+{
     uint32_t low, high;
     __asm__ __volatile__("rdmsr" : "=a"(low), "=d"(high) : "c"(msr));
     return ((uint64_t)high << 32) | low;
 }
 
-int is_long_mode() {
+int is_long_mode()
+{
     uint64_t efer = rdmsr(0xC0000080);
     return (efer & (1ULL << 8)) != 0;
 }
@@ -70,10 +72,10 @@ void _start(void)
         {
             volatile uint32_t *fb_ptr = framebuffer->address;
             uint8_t red, green, blue;
-            red = (j * 2) ^( i * 2);
+            red = (j * 2) ^ (i * 2);
             blue = i ^ j;
             green = (j * 4) ^ (i * 4);
-            fb_ptr[i * (framebuffer->pitch / 4) + j] = (((red << 16) & 0xFF0000)  | ((green << 8)& 0x00FF00) | (blue& 0x0000FF));
+            fb_ptr[i * (framebuffer->pitch / 4) + j] = (((red << 16) & 0xFF0000) | ((green << 8) & 0x00FF00) | (blue & 0x0000FF));
         }
     }
 
