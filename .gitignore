@@ -1,0 +1,6 @@
+/.git
+/.vscode
+/limine
+/ovmf
+*.iso
+*.hdd
