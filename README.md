@@ -1,3 +1,3 @@
 # DedOS
 
-Little OS project
+Little OS project with Limine
